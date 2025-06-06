@@ -1,0 +1,11 @@
+../hdl/uart_top.sv
+../hdl/uart_reg.sv
+../hdl/uart_crc_gen.sv
+../hdl/uart_baud_generator.sv
+../hdl/tx/uart_tx_control_path.sv  
+../hdl/tx/uart_tx_data_path.sv  
+../hdl/tx/uart_tx.sv
+../hdl/rx/uart_rx_control_path.sv  
+../hdl/rx/uart_rx_data_path.sv  
+../hdl/rx/uart_rx.sv
+tb_top.sv
