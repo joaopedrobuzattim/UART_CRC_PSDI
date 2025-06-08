@@ -3,7 +3,7 @@ module uart_tx_control_path (
     input       rst_i,
 
     input        tx_start_i,
-    input        trgger_i,
+    input        trigger_i,
     input        crc_en_i,
     input [4:0]  bit_cnt_i,
 
@@ -40,7 +40,7 @@ t_tx_states next_state, current_state;
 always_ff @(posedge clk_i, posedge rst_i) begin
     if (rst_i)
         current_state <= TX_IDLE;
-    else if(trgger_i)
+    else if(trigger_i)
         current_state <= next_state;
 end
 
@@ -69,9 +69,7 @@ always_comb begin
             end
         end
         TX_PARITY_BIT: begin
-            if(bit_cnt_i == 5'b1) begin
-                next_state <= TX_STOP_BIT;
-            end
+            next_state <= TX_STOP_BIT;
         end
         TX_CRC: begin
             if(bit_cnt_i == 5'h7) begin
@@ -79,9 +77,7 @@ always_comb begin
             end
         end
         TX_STOP_BIT: begin
-            if(bit_cnt_i == 5'b1) begin
-                next_state <= TX_IDLE;
-            end
+            next_state <= TX_IDLE;
         end
         default: next_state <= TX_IDLE;
     endcase

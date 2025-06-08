@@ -7,7 +7,8 @@ module uart_tx (
     input        tx_start_cmd_i,
     input        trigger_i,
 
-    output       tx_o
+    output       tx_o,
+    output       tx_int_o
 );
 
 
@@ -30,7 +31,7 @@ uart_tx_data_path i_uart_tx_data_path(
 
     .data_i(data_i),
     .crc_en_i(crc_en_i),
-    .trgger_i(trigger_i),
+    .trigger_i(trigger_i),
     .tx_start_cmd_i(tx_start_cmd_i),
     .changed_tx_state_i(changed_tx_state),
     .is_tx_idle_i(is_tx_idle),
@@ -41,7 +42,8 @@ uart_tx_data_path i_uart_tx_data_path(
     .is_tx_stop_i(is_tx_stop),
     .start_tx_o(start_tx),
     .tx_o(tx_o),
-    .bit_cnt_o(bit_cnt)
+    .bit_cnt_o(bit_cnt),
+    .tx_int_o(tx_int_o)
 );
 
 // ############################################################
@@ -52,7 +54,7 @@ uart_tx_control_path i_uart_tx_control_path (
     .rst_i(rst_i),
 
     .tx_start_i(start_tx),
-    .trgger_i(trigger_i),
+    .trigger_i(trigger_i),
     .crc_en_i(crc_en_i),
     .bit_cnt_i(bit_cnt),
 
