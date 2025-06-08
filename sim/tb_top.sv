@@ -15,6 +15,9 @@ module tb_top;
   logic        rx_data_valid_o;
   logic [7:0]  rx_data_o;
   logic [7:0]  tx_data_i;
+  logic       rx_int;
+  logic       tx_int;
+  logic       err_int;
 
   // Clock generation
   initial clk = 0;
@@ -28,6 +31,9 @@ module tb_top;
     .tx_o(tx_o),
     .rx_data_valid_o(rx_data_valid_o),
     .rx_data_o(rx_data_o),
+    .rx_int_o(rx_int),
+    .tx_int_o(tx_int),
+    .err_int_o(err_int),
     .tx_data_i(tx_data_i),
     .cfg_we(cfg_we),
     .cfg_cs(cfg_cs),

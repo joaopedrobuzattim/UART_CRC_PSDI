@@ -6,7 +6,9 @@ module uart_rx (
     input        crc_en_i,
     input        trigger_i,
 
-    output       [7:0] data_o
+    output       [7:0] data_o,
+    output       rx_int_o,
+    output       err_int_o
 );
 
 
@@ -37,7 +39,9 @@ uart_rx_data_path i_uart_rx_data_path(
     .sampled_start_o(sampled_start),
     .rx_i(rx_i),
     .bit_cnt_o(bit_cnt),
-    .data_o(data_o)
+    .data_o(data_o),
+    .rx_int_o(rx_int_o),
+    .err_int_o(err_int_o)
 );
 
 // ############################################################

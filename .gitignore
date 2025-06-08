@@ -1,0 +1,8 @@
+## Folders
+sim/*
+
+
+# Allow
+!/sim/tb_top.sv
+!/sim/Makefile
+!/sim/filelist.txt

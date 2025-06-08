@@ -63,9 +63,7 @@ always_comb begin
             end
         end
         RX_PARITY_BIT: begin
-            if(bit_cnt_i == 5'b1) begin
-                next_state <= RX_STOP_BIT;
-            end
+            next_state <= RX_STOP_BIT;
         end
         RX_CRC: begin
             if(bit_cnt_i == 5'h7) begin
@@ -73,9 +71,7 @@ always_comb begin
             end
         end
         RX_STOP_BIT: begin
-            if(bit_cnt_i == 5'b1) begin
-                next_state <= RX_IDLE;
-            end
+            next_state <= RX_IDLE;
         end
         default: next_state <= RX_IDLE;
     endcase

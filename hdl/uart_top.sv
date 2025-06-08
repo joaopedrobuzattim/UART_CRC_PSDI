@@ -15,6 +15,11 @@ module uart_top (
     // Transmit Buffer
     input  logic [7:0]  tx_data_i,
 
+    // Interruptions
+    output       rx_int_o,
+    output       tx_int_o,
+    output       err_int_o,
+
     // Register Cfg,
     input  logic        cfg_we,
     input  logic        cfg_cs,
@@ -79,7 +84,8 @@ uart_tx i_uart_tx(
     .tx_start_cmd_i(tx_start_cmd),
     .trigger_i(trigger_tx),
 
-    .tx_o(tx_o)
+    .tx_o(tx_o),
+    .tx_int_o(tx_int_o)
 );
 
 // ############################################################
@@ -93,7 +99,9 @@ uart_rx i_uart_rx(
     .crc_en_i(crc_en),
     .trigger_i(trigger_rx),
 
-    .data_o()
+    .data_o(),
+    .rx_int_o(rx_int_o),
+    .err_int_o(err_int_o)
 );
 
 
