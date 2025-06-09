@@ -1,7 +1,7 @@
 localparam UART_OPERATION_CONFIG = 5'b00000;
 localparam UART_CMD              = 5'b00001;
 localparam UART_TX_DATA          = 5'b00010;
-localparam UART_RX_DATA          = 5'b00010;
+localparam UART_RX_DATA          = 5'b00011;
 
 module uart_reg (
     input  logic        clk,
@@ -10,15 +10,17 @@ module uart_reg (
     input  logic        cfg_we,
     input  logic        cfg_cs,
     input  logic [31:0] cfg_data_i,
-    input  logic [31:0] cfg_data_o,
     input  logic [4:0]  cfg_addr_i,
+
+    input        [7:0]  rx_data_i,
 
     output logic        tx_en_o,
     output logic        rx_en_o,
     output logic        crc_en_o,
     output logic [15:0] clock_divider_o,
     output logic        tx_start_cmd_o,
-    output logic [7:0]  tx_data_o
+    output logic [7:0]  tx_data_o,
+    output logic [31:0] cfg_data_o
 );
 
 
@@ -28,6 +30,9 @@ module uart_reg (
     logic        r_uart_rx_en;
     logic [15:0] r_uart_clock_divider;
     logic        r_uart_tx_cmd;
+    logic  [4:0] rd_addr;
+    
+    assign rd_addr = (cfg_cs &  ~cfg_we) ? cfg_addr_i : 5'h0;
     
     always_ff @( posedge clk, posedge rst_i ) begin
         if (rst_i) begin
@@ -64,7 +69,16 @@ module uart_reg (
         end      
     end
 
-    
+    // Register Read
+    always_comb
+    begin
+    cfg_data_o = 32'h0;
+    case (rd_addr)
+        UART_OPERATION_CONFIG  : cfg_data_o                 = {r_uart_clock_divider, 13'h0, r_uart_rx_en, r_uart_tx_en, r_uart_crc_en};
+        UART_TX_DATA           : cfg_data_o                 = {24'h0, r_uart_tx_data};
+        UART_RX_DATA           : cfg_data_o                 = {24'h0, rx_data_i};
+    endcase
+    end
 
 
     // Output 

@@ -115,5 +115,6 @@ module uart_rx_data_path (
 
 
     assign bit_cnt_o = bit_cnt;
+    assign data_o    = data_in;
 
 endmodule
