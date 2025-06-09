@@ -8,13 +8,6 @@ module uart_top (
     input  logic        rx_i,
     output logic        tx_o,
 
-    // Receive Buffer 
-    output logic        rx_data_valid_o,
-    output logic [7:0]  rx_data_o,
-
-    // Transmit Buffer
-    input  logic [7:0]  tx_data_i,
-
     // Interruptions
     output       rx_int_o,
     output       tx_int_o,
@@ -24,15 +17,15 @@ module uart_top (
     input  logic        cfg_we,
     input  logic        cfg_cs,
     input  logic [31:0] cfg_data_i,
-    input  logic [31:0] cfg_data_o,
-    input  logic [4:0]  cfg_addr_i
+    input  logic [4:0]  cfg_addr_i,
+    output logic [31:0] cfg_data_o
 
-   
 );
 
 
 logic [15:0] clock_divider;
 logic [7:0]  tx_data;
+logic [7:0]  rx_data;
 logic        tx_start_cmd;
 logic        trigger_tx;
 logic        trigger_rx;
@@ -64,6 +57,7 @@ uart_reg i_uart_registers(
     .cfg_data_o(cfg_data_o),
     .cfg_addr_i(cfg_addr_i),
 
+    .rx_data_i(rx_data),
     .crc_en_o(crc_en),
     .tx_en_o(tx_en),
     .rx_en_o(rx_en),
@@ -99,7 +93,7 @@ uart_rx i_uart_rx(
     .crc_en_i(crc_en),
     .trigger_i(trigger_rx),
 
-    .data_o(),
+    .data_o(rx_data),
     .rx_int_o(rx_int_o),
     .err_int_o(err_int_o)
 );
