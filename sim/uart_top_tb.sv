@@ -1,4 +1,4 @@
-module tb_top;
+module uart_top_tb;
 
   // Clock and reset
   logic clk;
@@ -23,14 +23,14 @@ module tb_top;
   // DUT instantiation
   uart_top dut (
     .clk(clk),
-    .rst_i(rst),
+    .rst(rst),
     .rx_i(rx_i),
     .tx_o(tx_o),
     .rx_int_o(rx_int),
     .tx_int_o(tx_int),
     .err_int_o(err_int),
-    .cfg_we(cfg_we),
-    .cfg_cs(cfg_cs),
+    .cfg_we_i(cfg_we),
+    .cfg_cs_i(cfg_cs),
     .cfg_data_i(cfg_data_i),
     .cfg_data_o(cfg_data_o),
     .cfg_addr_i(cfg_addr_i)

@@ -3,6 +3,6 @@ sim/*
 
 
 # Allow
-!/sim/tb_top.sv
+!/sim/uart_top_tb.sv
 !/sim/Makefile
 !/sim/*.txt

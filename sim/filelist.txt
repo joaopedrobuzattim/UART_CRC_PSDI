@@ -8,4 +8,4 @@
 ../hdl/rx/uart_rx_control_path.sv  
 ../hdl/rx/uart_rx_data_path.sv  
 ../hdl/rx/uart_rx.sv
-tb_top.sv
+uart_top_tb.sv
