@@ -74,9 +74,9 @@ module uart_rx_data_path (
             parity_bit_in <= rx_i;
     end
 
-    // Parity Bit Calculation (Even parity)
+    // Parity Bit Calculation (Odd Parity)
     always_comb begin
-        parity_bit = ^data_in;
+        parity_bit = ~(^data_in);
     end
     
         

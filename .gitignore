@@ -5,4 +5,9 @@ sim/*
 # Allow
 !/sim/uart_top_tb.sv
 !/sim/Makefile
-!/sim/*.txt
+!/sim/correct_*.txt
+!/sim/incorrect_*.txt
+
+
+# Folders required for the work specification
+/backend/*
